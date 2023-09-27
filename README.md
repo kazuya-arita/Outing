@@ -20,7 +20,7 @@
 ・購入したい商品を検索するとき<br>
 ・目的の商品がどのコーナーで売られているか知りたいとき<br>
 ・取り扱っている商品と販売店舗が知りたいとき<br>
-・近くに店舗があるか検索する
+・近くに店舗があるか検索するとき
 ​
 ## 設計書
 後程作成予定
@@ -31,4 +31,7 @@
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
+
+## 実装機能リスト
+https://docs.google.com/spreadsheets/d/10qb1qGVaty0qReusN4HI6kcSGgAtcmbQgo0qhh4Fti0/edit#gid=375590402
 ​
