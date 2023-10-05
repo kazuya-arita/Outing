@@ -1,0 +1,35 @@
+<header class="shadow-sm">
+ <nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+
+   <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ml-auto">
+      
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to "商品一覧", items_path, class: "btn btn-light mx-2" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "マイページ", customers_information_path, class: "btn btn-light mx-2" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "カート", cart_items_path, class: "btn btn-light mx-2" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-light mx-2" %>
+        </li class="nav-item">
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "About", about_path, class: "btn btn-light mx-2" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "商品一覧", items_path, class: "btn btn-light mx-2" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-light mx-2" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログイン", new_customer_session_path, class: "btn btn-light mx-2" %>
+        </li>
+      <% end %>
+</header>

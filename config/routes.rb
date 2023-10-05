@@ -11,5 +11,12 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
+  
+  #public/postsコントローラー
+  get "search" => "public/posts#search"
+  scope module: :public do
+   resources :posts, only: [:index, :new, :create, :show, :destroy ]
+  end   
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
