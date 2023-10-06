@@ -1,35 +1,65 @@
-<header class="shadow-sm">
- <nav class="navbar navbar-expand-lg navbar-light">
+ <header class="shadow-sm">
   <div class="container">
-
-   <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav ml-auto">
-      
-      <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to "商品一覧", items_path, class: "btn btn-light mx-2" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "マイページ", customers_information_path, class: "btn btn-light mx-2" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "カート", cart_items_path, class: "btn btn-light mx-2" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-light mx-2" %>
-        </li class="nav-item">
-      <% else %>
-        <li class="nav-item">
-          <%= link_to "About", about_path, class: "btn btn-light mx-2" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "商品一覧", items_path, class: "btn btn-light mx-2" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-light mx-2" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "ログイン", new_customer_session_path, class: "btn btn-light mx-2" %>
-        </li>
-      <% end %>
+    <div class="row">
+      <div class="col-7 text-center">
+        <h1>Outing!</h1>
+      </div>
+      <div class="col-5 text-center">
+        <h3>search</h3>
+      </div>
+    </div>   
+ 
+    <div class="row">
+     <div class="col-8 offset-2">
+      <div class="row mt-2">
+       
+       <% if user_signed_in? %>
+        <div class="col-3 text-center">
+         <%= link_to posts_path, class: 'text-dark' do %>   
+          <h4><i class="fa-solid fa-house"></i></h4>
+         <% end %>
+        </div>  
+       
+        <div class="col-3 text-center">
+         <%= link_to new_post_path, class: 'text-dark' do %>
+          <h4><i class="fa-solid fa-pen-to-square"></i></h4>
+         <% end %>
+        </div>  
+        
+        <div class="col-3 text-center">
+         <%= link_to user_path(current_user.id), class: 'text-dark' do %>
+          <h4><i class="fa-solid fa-user"></i></h4>
+         <% end %>
+        </div>
+        
+        <div class="col-3 text-center">
+         <%= link_to destroy_user_session_path, method: :delete, class: 'text-dark' do %>
+          <h4><i class="fa-solid fa-right-from-bracket"></i></h4>
+         <% end %>
+        </div>
+       <% else %>
+        <div class="col-3 text-center">
+         <%= link_to posts_path, class: 'nav-link text-dark' do %>   
+          <h4><i class="fa-solid fa-house"></i></h4>
+         <% end %>
+        </div>
+        
+        <div class="col-3 text-center">
+         <%= link_to new_user_registration_path, class: 'nav-link text-dark' do %>
+          <h4><i class="fa-solid fa-user-plus"></i></h4>
+         <% end %>
+        </div>
+        
+        <div class="col-3 text-center">
+         <%= link_to new_user_session_path, class: 'nav-link text-dark' do %>
+          <h4><i class="fa-solid fa-right-to-bracket"></i></h4>
+         <% end %>
+        </div>
+       <% end %>
+        
+      </div>
+     </div>
+    </div>
+    
+  </div>  
 </header>

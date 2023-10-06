@@ -18,5 +18,12 @@ Rails.application.routes.draw do
    resources :posts, only: [:index, :new, :create, :show, :destroy ]
   end   
   
+  #public/usersコントローラー
+  scope module: :public do
+    resources :users, only: [:show, :edit, :update, :destroy]
+  end  
+  
+  #public
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
