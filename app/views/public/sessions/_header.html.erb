@@ -1,4 +1,4 @@
- <header class="shadow-sm">
+ <header class="shadow-sm bg-light">
   <div class="container">
     <div class="row">
       <div class="col-7 text-center">
@@ -7,31 +7,31 @@
       <div class="col-5 text-center">
         <h3>search</h3>
       </div>
-    </div>   
- 
+    </div>
+
     <div class="row">
      <div class="col-8 offset-2">
       <div class="row mt-2">
-       
+
        <% if user_signed_in? %>
         <div class="col-3 text-center">
-         <%= link_to posts_path, class: 'text-dark' do %>   
+         <%= link_to post_items_path, class: 'text-dark' do %>
           <h4><i class="fa-solid fa-house"></i></h4>
          <% end %>
-        </div>  
-       
+        </div>
+
         <div class="col-3 text-center">
-         <%= link_to new_post_path, class: 'text-dark' do %>
+         <%= link_to new_post_item_path, class: 'text-dark' do %>
           <h4><i class="fa-solid fa-pen-to-square"></i></h4>
          <% end %>
-        </div>  
-        
+        </div>
+
         <div class="col-3 text-center">
          <%= link_to user_path(current_user.id), class: 'text-dark' do %>
           <h4><i class="fa-solid fa-user"></i></h4>
          <% end %>
         </div>
-        
+
         <div class="col-3 text-center">
          <%= link_to destroy_user_session_path, method: :delete, class: 'text-dark' do %>
           <h4><i class="fa-solid fa-right-from-bracket"></i></h4>
@@ -39,27 +39,27 @@
         </div>
        <% else %>
         <div class="col-3 text-center">
-         <%= link_to posts_path, class: 'nav-link text-dark' do %>   
+         <%= link_to posts_path, class: 'nav-link text-dark' do %>
           <h4><i class="fa-solid fa-house"></i></h4>
          <% end %>
         </div>
-        
+
         <div class="col-3 text-center">
          <%= link_to new_user_registration_path, class: 'nav-link text-dark' do %>
           <h4><i class="fa-solid fa-user-plus"></i></h4>
          <% end %>
         </div>
-        
+
         <div class="col-3 text-center">
          <%= link_to new_user_session_path, class: 'nav-link text-dark' do %>
           <h4><i class="fa-solid fa-right-to-bracket"></i></h4>
          <% end %>
         </div>
        <% end %>
-        
+
       </div>
      </div>
     </div>
-    
-  </div>  
+
+  </div>
 </header>

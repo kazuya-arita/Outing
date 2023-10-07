@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   #public/postsコントローラー
   get "search" => "public/posts#search"
   scope module: :public do
-   resources :posts, only: [:index, :new, :create, :show, :destroy ]
+   resources :post_items, only: [:index, :new, :create, :show, :destroy ]
   end   
   
   #public/usersコントローラー
