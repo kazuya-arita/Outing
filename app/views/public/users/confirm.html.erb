@@ -1,0 +1,10 @@
+<div class="d-flex align-items-center text-center" style="height:500px;">
+ <div class="container">
+ <p><strong>本当にアカウントを削除しますか？</strong></p>
+ <p>アカウントを削除すると、ユーザー情報や<br>
+    これまでの投稿履歴がすべて削除されます。<br>
+    アカウントを削除する場合は、「アカウントを削除する」をクリックしてください。</p>
+
+ <%= link_to "ユーザー情報に戻る", user_path(@user.id), class: "btn btn-primary" %>
+ <%= link_to "アカウントを削除する", user_path(@user.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+ </div>

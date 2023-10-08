@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   end   
   
   #public/usersコントローラー
+  get "users/confirm" => "public/users#confirm"
   scope module: :public do
     resources :users, only: [:show, :edit, :update, :destroy]
   end  

@@ -16,7 +16,14 @@ class Public::UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to post_items_path
   end
+
+  def confirm
+    @user = current_user
+  end  
 
   private
 

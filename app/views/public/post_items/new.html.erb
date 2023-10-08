@@ -4,20 +4,19 @@
   <div class="row">
     <div class="col-3">
       <div class="bg-primary rounded">
-        <h3>ユーザー編集</h3>
+        <h3>新規投稿</h3>
       </div>
     </div>
   </div>
 </div>
 
-
 <div class="container mt-3 border-bottom border-black">
   <div class="row">
-    <%= form_with model: @user do |f| %>
+    <%= form_with model: @post_item do |f| %>
       <div class="col-4 offset-1 mb-3">
         <h5>
-          <label>プロフィール画像</label>
-          <%= f.file_field :profile_image, accept: "image/*" %>
+          <label>写真</label>
+          <%= f.file_field :image, accept: "image/*" %>
         </h5>
       </div>
 
@@ -45,4 +44,3 @@
   <% end %>
 
 </div>
-
