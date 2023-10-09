@@ -2,7 +2,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.post_items
+    @post_items = @user.post_items
   end
 
   def edit

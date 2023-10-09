@@ -9,7 +9,7 @@ class Public::PostItemsController < ApplicationController
   end
   
   def create
-    @oost_item = PostItem.new(post_item_params)
+    @post_item = PostItem.new(post_item_params)
     @post_item.user_id = current_user.id
     @post_item.save
     redirect_to post_items_path

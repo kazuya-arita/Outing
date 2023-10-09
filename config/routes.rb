@@ -12,10 +12,12 @@ Rails.application.routes.draw do
     sessions: "public/sessions"
   }
   
-  #public/postsコントローラー
+  #public/post_itemsコントローラー
   get "search" => "public/posts#search"
   scope module: :public do
-   resources :post_items, only: [:index, :new, :create, :show, :destroy ]
+    resources :post_items, only: [:index, :new, :create, :show, :destroy ] do
+      resources :post_comments, only: [:create]
+    end 
   end   
   
   #public/usersコントローラー
