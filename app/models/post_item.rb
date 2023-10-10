@@ -13,6 +13,10 @@ class PostItem < ApplicationRecord
       image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg' )
     end
     image
-  end 
+  end
+  
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
   
 end

@@ -16,9 +16,15 @@ class Public::PostItemsController < ApplicationController
   end  
   
   def show
+    @post_item = PostItem.find(params[:id])
+    @post_comment = PostComment.new
+    @user = User.find(params[:id])
   end
   
   def destroy
+    post_item = PostItem.find(params[:id])
+    post_item.destroy
+    redirect_to post_items_path
   end  
   
   private

@@ -1,7 +1,7 @@
 class Public::PostCommentsController < ApplicationController
 
   def create
-    @post_item = PostItem.find(params[:post_item_id])
+    post_item = PostItem.find(params[:post_item_id])
     comment = current_user.post_comments.new(post_comment_params)
     comment.post_item_id = post_item.id
     comment.save
