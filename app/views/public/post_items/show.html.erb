@@ -25,20 +25,22 @@
             <div>
               <p>コメント件数：<%= @post_item.post_comments.count %></p>
               <% @post_item.post_comments.each do |post_comment| %>
-                <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-                <%= post_comment.user.nickname %>
+                <div class="border">
+                <%= image_tag post_comment.user.get_profile_image(80,80), class: "rounded-circle" %>
+                <strong><%= post_comment.user.nickname %></strong>
                 <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-                <%= post_comment.comment %>
+                <p><%= post_comment.comment %></p>
                 <% if post_comment.user == current_user %>
-                  <%= link_to "削除", post_item_post_comments_path(post_comment.comment, post_comment), method: :delete %>
+                  <%= link_to "削除", post_item_post_comments_path(post_comment.comment, post_comment), method: :delete, class: "btn btn-danger" %>
                 <% end %>
+                </div>
               <% end %>
             </div>
 
-            <div>
+            <div class="mt-3">
               <%= form_with model:[@post_item, @post_comment] do |f| %>
-                <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-                <%= f.submit "送信する" %>
+                <%= f.text_area :comment, rows:'3',placeholder: "コメントを入力" %>
+                <%= f.submit "送信する", class: "btn btn-success" %>
               <% end %>
             </div>
 
@@ -46,13 +48,13 @@
             <% if @post_item.favorited_by?(current_user) %>
               <p>
                 <%= link_to post_item_favorites_path(@post_item), method: :delete do %>
-                  ♥<%= @post_item.favorites.count %> いいね
+                  <i class="fa-solid fa-heart"></i><%= @post_item.favorites.count %>
                 <% end %>
               </p>
               <% else %>
               <p>
                 <%= link_to post_item_favorites_path(@post_item), method: :post do %>
-                  ♡<%= @post_item.favorites.count %> いいね
+                  <i class="fa-regular fa-heart"></i><%= @post_item.favorites.count %>
                 <% end %>
               </p>
             <% end %>
