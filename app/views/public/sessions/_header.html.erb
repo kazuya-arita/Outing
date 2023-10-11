@@ -4,8 +4,11 @@
       <div class="col-7 text-center">
         <h1>Outing!</h1>
       </div>
-      <div class="col-5 text-center">
-        <h3>search</h3>
+      <div class="col-5 text-center mt-2">
+        <%= form_tag('/search', method: :get, class: 'search-form') do %>
+         <%= text_field_tag :search %>
+         <%= submit_tag 'Search', :name => nil, class: "btn btn-primary" %>
+        <% end %>
       </div>
     </div>
 

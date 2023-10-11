@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   }
   
   #public/post_itemsコントローラー
-  get "search" => "public/posts#search"
+  get "search" => "public/post_items#search"
   scope module: :public do
     resources :post_items, only: [:index, :new, :create, :show, :destroy ] do
       resources :post_comments, only: [:create]

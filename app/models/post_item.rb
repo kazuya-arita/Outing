@@ -19,4 +19,12 @@ class PostItem < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
   
+  def self.search(search)
+    if search
+      PostItem.where(['post_item LIKE ?', "%#{search}%"])
+    else
+      PostItem.all.order('id DESC').limit(50)
+    end
+  end
+  
 end
