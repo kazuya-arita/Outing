@@ -1,7 +1,7 @@
 class Public::PostItemsController < ApplicationController
   
   def index
-    @post_items = PostItem.all.order('id DESC').limit(50)
+    @post_items = PostItem.all.order('created_at DESC').limit(50)
   end 
   
   def new

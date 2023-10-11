@@ -4,6 +4,15 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:passwords, :registrations], controllers: {
     sessions: "admin/sessions"
   }
+
+#admin/homesコントローラー
+get "admin" => "admin/homes#top"
+get "admin/search" => "admin/homes#search"
+
+#admin/usersコントローラー
+namespace :admin do
+  resources :users, only: [:show, :edit, :update]
+end
   
 #ユーザー用
 # URL /users/sign_in ...
