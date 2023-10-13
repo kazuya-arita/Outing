@@ -4,6 +4,11 @@ class Admin::HomesController < ApplicationController
     @post_items = PostItem.all.order('created_at DESC').limit(50)
   end 
   
+  def show
+    @post_item = PostItem.find(params[:id])
+    @user = User.find(params[:id])
+  end  
+  
   def search 
     @post_items = PostItem.search(params[:search])
   end  

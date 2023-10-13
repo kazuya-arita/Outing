@@ -1,5 +1,7 @@
 class Public::PostItemsController < ApplicationController
   
+  before_action :authenticate_user!, exept: :index
+  
   def index
     @post_items = PostItem.all.order('created_at DESC').limit(50)
     

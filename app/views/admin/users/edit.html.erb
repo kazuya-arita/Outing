@@ -1,0 +1,51 @@
+<%= render "admin/sessions/header" %>
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-3">
+      <div class="bg-primary rounded">
+        <h3>ユーザー編集</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container mt-3 mb-3">
+  <div class="row">
+    <div class="col-1 offset-1">
+      <%= image_tag @user.get_profile_image(100, 100), class: "rounded-circle"; %>
+    </div>
+
+    <div class="col-3 d-flex align-items-center ml-5">
+      <h5>
+        ニックネーム：<%= @user.nickname %><br>
+        ユーザー名：<%= @user.user_name %>
+      </h5>
+    </div>
+  </div>
+
+  <div class="row mt-3 mb-3">
+    <div class="col-8 offset-2">
+      <h5 class="border"><%= @user.introduction %></h5>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-4 offset-4">
+      <%= form_with model: @user, url: admin_user_path(@user.id) do |f| %>
+        <label><strong>ユーザーステータス</strong></label>
+        <div>
+          <%= f.radio_button :is_active, :true %>
+          <%= f.label :is_active, "有効", {value: :true, style: "display: inline-block;"} %>
+
+          <%= f.radio_button :is_active, :false %>
+          <%= f.label :is_active, "無効", {value: :false, style: "display: inline-block;"} %>
+
+          <h5><%= f.submit "更新する", class: "btn btn-success ml-2" %></h5>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
