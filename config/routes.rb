@@ -30,6 +30,7 @@ end
     resources :post_items, only: [:index, :new, :create, :show, :destroy ] do
       resources :post_comments, only: [:create]
       resource :favorites, only: [:create, :destroy]
+      resources :favorites, only: [:index]
     end 
   end   
   

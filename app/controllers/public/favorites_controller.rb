@@ -1,5 +1,9 @@
 class Public::FavoritesController < ApplicationController
   
+  def index
+    @favorites = current_user.favorites.where(post_item_id: post_item.id).order('id DESC').limit(50)
+  end  
+  
   def create
     post_item = PostItem.find(params[:post_item_id])
     favorite = current_user.favorites.new(post_item_id: post_item.id)
