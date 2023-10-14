@@ -30,14 +30,17 @@ end
     resources :post_items, only: [:index, :new, :create, :show, :destroy ] do
       resources :post_comments, only: [:create]
       resource :favorites, only: [:create, :destroy]
-      resources :favorites, only: [:index]
     end 
   end   
   
   #public/usersコントローラー
   get "users/confirm" => "public/users#confirm"
   scope module: :public do
-    resources :users, only: [:show, :edit, :update, :destroy]
+    resources :users, only: [:show, :edit, :update, :destroy] do
+      member do
+        get :favorites
+      end  
+    end  
   end  
   
   #public

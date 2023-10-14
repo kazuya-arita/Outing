@@ -1,0 +1,46 @@
+<%= render "public/sessions/header" %>
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-3">
+      <div class="bg-primary rounded">
+        <h3>いいねした投稿一覧</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-list-container py-5">
+  <% @favorite_post_items.each do |favorite_post_item| %>
+  <div class="card mx-auto mt-4 shadow-lg" style="width: 55rem;">
+    <%= link_to post_item_path(favorite_post_item.id) do %>
+      <%= image_tag favorite_post_item.get_image, class:"card-img-top"; %>
+    <% end %>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-2">
+          <%= link_to user_path(favorite_post_item.user.id) do %>
+            <%= image_tag favorite_post_item.user.get_profile_image(100,100), class:"mt-3 rounded-circle"; %>
+          <% end %>
+        </div>
+        <div class="col-10">
+          <p class="card-title">
+            <strong><%= favorite_post_item.user.nickname %> (<%= favorite_post_item.user.user_name %>) </strong>
+          </p>
+          <p class="card-text">
+            <%= favorite_post_item.post_item %>
+          </p>
+          <p>
+            <i class="fa-solid fa-location-dot"></i>
+            <span><%= favorite_post_item.address %></span>
+          </p>
+          <span>
+            <%= link_to "#{favorite_post_item.post_comments.count}コメント |", post_item_path(favorite_post_item.id), class:"text-dark" %>
+            <i class="fa-solid fa-heart"></i><%= favorite_post_item.favorites.count %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

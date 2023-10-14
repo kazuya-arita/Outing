@@ -1,6 +1,6 @@
 class Public::PostItemsController < ApplicationController
   
-  before_action :authenticate_user!, exept: :index
+  before_action :authenticate_user!, except: [:index]
   
   def index
     @post_items = PostItem.all.order('created_at DESC').limit(50)
