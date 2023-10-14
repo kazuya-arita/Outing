@@ -24,7 +24,7 @@ class Public::SessionsController < Devise::SessionsController
     if @user.valid_password?(params[:user][:password])
       if @user.is_active == true
       else
-        render :new
+        redirect_to action: :new
       end
     end
   end
