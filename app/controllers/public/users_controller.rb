@@ -27,7 +27,7 @@ class Public::UsersController < ApplicationController
   end
 
   def favorites
-    favorites = Favorite.where(user_id: @user.id).pluck(:post_item_id)
+    favorites = Favorite.order('created_at DESC').limit(50).where(user_id: @user.id).pluck(:post_item_id)
     @favorite_post_items = PostItem.find(favorites)
   end
 
