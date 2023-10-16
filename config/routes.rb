@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
 #管理者用 
 # URL /admin/sign_in ...
   devise_for :admin, skip: [:passwords, :registrations], controllers: {
@@ -37,6 +38,9 @@ end
   get "users/confirm" => "public/users#confirm"
   scope module: :public do
     resources :users, only: [:show, :edit, :update, :destroy] do
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
       member do
         get :favorites
       end  
