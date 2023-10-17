@@ -21,7 +21,12 @@
       <h5>
         ニックネーム：<%= @user.nickname %><br>
         ユーザー名：<%= @user.user_name %><br>
-        フォロー数：<%= link_to @user.followings.count
+        <%= link_to user_followings_path(@user.id) do %>
+          フォロー数：<%= @user.followings.count %>
+        <% end %><br>
+        <%= link_to user_followers_path(@user.id) do %>
+          フォロワー数: <%= @user.followers.count %>
+        <% end %>
       </h5>
     </div>
 

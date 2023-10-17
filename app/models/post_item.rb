@@ -22,7 +22,6 @@ class PostItem < ApplicationRecord
   def self.search(search)
     if search
       PostItem.where(['post_item LIKE ? OR address LIKE(?)', "%#{search}%", "%#{search}%"])
-      
     else
       PostItem.all.order('created_at DESC').limit(50)
     end
