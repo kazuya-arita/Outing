@@ -35,7 +35,16 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-
+  
+  #ユーザーの検索
+  def self.search(search)
+    if search
+      User.where(['nickname LIKE ? OR user_name LIKE(?)', "%#{search}%", "%#{search}%"])
+    else
+      User.all.limit(50)
+    end
+  end
+ 
   validates :user_name,
   uniqueness: true,
   length: {maximum: 10 },

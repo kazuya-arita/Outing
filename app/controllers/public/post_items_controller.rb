@@ -30,10 +30,6 @@ class Public::PostItemsController < ApplicationController
     redirect_to post_items_path
   end  
   
-  def search
-    @post_items = PostItem.search(params[:search])
-  end
-  
   private
   
   def post_item_params

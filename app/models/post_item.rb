@@ -19,6 +19,7 @@ class PostItem < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
   
+  #投稿内容の
   def self.search(search)
     if search
       PostItem.where(['post_item LIKE ? OR address LIKE(?)', "%#{search}%", "%#{search}%"])

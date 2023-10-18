@@ -1,0 +1,38 @@
+<%= render "public/sessions/header" %>
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <% if @model == "User" %>
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>ニックネーム</th>
+                <th>ユーザーネーム</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |user| %>  
+                <tr>
+                  <td>
+                    <%= link_to user_path(user.id) do %>
+                     <%= image_tag user.get_profile_image(50, 50), class: "rounded-circle"; %>
+                    <% end %>
+                  </td>
+                  <td><%= user.nickname %></td>
+                  <td><%= user.user_name %></td>
+                  <td><%= user.introduction %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>    
+        <%= render "public/post_items/list" %>
+      <% end %>
+    </div>
+  </div>
+</div>  
