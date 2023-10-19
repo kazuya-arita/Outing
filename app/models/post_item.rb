@@ -2,6 +2,7 @@ class PostItem < ApplicationRecord
   belongs_to :user
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :repost_items, dependent: :destroy
   
   has_one_attached :image
   
