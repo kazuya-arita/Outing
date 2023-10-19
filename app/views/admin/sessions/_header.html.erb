@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
 
-       <% if user_signed_in? %>
+       <% if admin_signed_in? %>
         <div class="col-2 d-flex align-items-center">
          <%= link_to admin_path, class: 'text-dark' do %>
           <h1>Outing!</h1>
@@ -16,10 +16,7 @@
         </div>
 
         <div class="col-5 align-items-center">
-          <%= form_tag('/admin/search', method: :get, class: 'search-form') do %>
-            <%= text_field_tag :search %>
-            <%= submit_tag 'Search', :name => nil, class: "btn btn-primary" %>
-          <% end %>
+          <%= render "admin/searchs/form" %>
         </div>
        <% else %>
         <div class="col-2 text-center">
@@ -35,10 +32,7 @@
         </div>
 
         <div class="col-5 text-center mt-2">
-          <%= form_tag('/search', method: :get, class: 'search-form') do %>
-            <%= text_field_tag :search %>
-            <%= submit_tag 'Search', :name => nil, class: "btn btn-primary" %>
-          <% end %>
+          <%= render "admin/searchs/form" %>
         </div>
        <% end %>
 

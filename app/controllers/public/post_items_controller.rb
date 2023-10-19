@@ -14,8 +14,13 @@ class Public::PostItemsController < ApplicationController
   def create
     @post_item = PostItem.new(post_item_params)
     @post_item.user_id = current_user.id
-    @post_item.save
-    redirect_to post_items_path
+    if @post_item.save
+      flash[:notice] = "投稿しました。"
+      redirect_to post_items_path
+    else
+      flash.now[:alert] = "投稿できませんでした。"
+      render :new
+    end  
   end  
   
   def show

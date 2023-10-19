@@ -1,0 +1,2 @@
+class RepostItem < ApplicationRecord
+end

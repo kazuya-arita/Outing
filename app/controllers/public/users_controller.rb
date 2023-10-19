@@ -12,8 +12,13 @@ class Public::UsersController < ApplicationController
 
   def update
     @user = current_user
-    @user.update(user_params)
-    redirect_to user_path(@user.id)
+    if @user.update(user_params)
+      flash[:notice] = "更新しました。"
+      redirect_to user_path(@user.id)
+    else
+      flash[:alert] = "更新できませんでした。"
+      render :edit
+    end  
   end
 
   def destroy

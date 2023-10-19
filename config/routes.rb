@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
 #admin/homesコントローラー
 get "admin" => "admin/homes#top"
-get "admin/search" => "admin/homes#search"
 namespace :admin do
   resources :homes, only: [:show] #投稿詳細画面の閲覧
 end
@@ -17,6 +16,9 @@ end
 namespace :admin do
   resources :users, only: [:show, :edit, :update]
 end
+
+#admin/searchsコントローラー
+get "admin/search" => "admin/searchs#search"
 
 #ユーザー用
 # URL /users/sign_in ...

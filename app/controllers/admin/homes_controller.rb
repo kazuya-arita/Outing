@@ -9,8 +9,4 @@ class Admin::HomesController < ApplicationController
     @user = User.find(params[:id])
   end  
   
-  def search 
-    @post_items = PostItem.search(params[:search])
-  end  
-  
 end
