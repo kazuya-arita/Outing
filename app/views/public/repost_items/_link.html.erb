@@ -1,0 +1,6 @@
+<% if user_signed_in? %>
+  <% unless post_item.user.id == current_user %>
+    <% if current_user.repost_item?(post_item_id) %>
+      <%= link_to post_item_repost_items_path, method: :delete, remote: true do %>
+        <i class="fa-solid fa-repeat"></i>
+      <% end %>  

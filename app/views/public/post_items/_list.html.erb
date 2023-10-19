@@ -24,6 +24,7 @@
           </p>
           <span>
             <%= link_to "#{post_item.post_comments.count}コメント |", post_item_path(post_item.id), class:"text-dark" %>
+            
             <i class="fa-solid fa-heart"></i><%= post_item.favorites.count %>
           </span>
         </div>

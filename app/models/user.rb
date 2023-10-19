@@ -47,6 +47,11 @@ class User < ApplicationRecord
     end
   end
  
+  #リポストしているか判定
+  def repost_item?(post_item_id)
+    self.repost_items.where(post_item_id: post_item_id).exists?
+  end   
+ 
   validates :user_name,
   uniqueness: true,
   length: {maximum: 10 },
