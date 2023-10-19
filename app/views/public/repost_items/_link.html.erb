@@ -1,6 +1,21 @@
 <% if user_signed_in? %>
   <% unless post_item.user.id == current_user %>
     <% if current_user.repost_item?(post_item_id) %>
-      <%= link_to post_item_repost_items_path, method: :delete, remote: true do %>
+      <%= link_to post_item_repost_items_path(post_item.repost_item.id), method: :delete, remote: true do %>
         <i class="fa-solid fa-repeat"></i>
-      <% end %>  
+        <%= post_item.repost_items.count %>
+      <% end %>
+    <% else %>
+      <%= link_to post_item_repost_items_path, method: :post, remote: true do %>
+        <i class="fa-solid fa-repeat"></i>
+        <%= post_item.repost_items.count %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <i class="fa-solid fa-repeat.nonactive"></i>
+    <%= post_item.repost_items.count %>
+  <% end %>
+<% else %>
+  <i class="fa-solid fa-repeat.nonactive"></i>
+  <%= post_item.repost_items.count %>
+<% end %>
