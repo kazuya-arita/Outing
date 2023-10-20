@@ -3,6 +3,7 @@ class PostItem < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :repost_items, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   
   has_one_attached :image
   
@@ -20,7 +21,7 @@ class PostItem < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
   
-  #投稿内容の
+  #投稿内容の検索
   def self.search(search)
     if search
       PostItem.where(['post_item LIKE ? OR address LIKE(?)', "%#{search}%", "%#{search}%"])

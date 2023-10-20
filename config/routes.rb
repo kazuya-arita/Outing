@@ -32,7 +32,7 @@ get "admin/search" => "admin/searchs#search"
     resources :post_items, only: [:index, :new, :create, :show, :destroy ] do
       resources :post_comments, only: [:create]
       resource :favorites, only: [:create, :destroy]
-      resources :repost_items, only: [:create, :destroy]
+      resource :repost_items, only: [:create, :destroy]
     end
   end
 
