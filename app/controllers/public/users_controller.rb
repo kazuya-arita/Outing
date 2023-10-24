@@ -1,8 +1,8 @@
 class Public::UsersController < ApplicationController
-  before_action :set_user, only: [:favorites]
+  before_action :set_user #, only: [:favorites]
 
   def show
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id])
     @post_items = @user.post_items_with_repost_items
   end
 
@@ -18,7 +18,7 @@ class Public::UsersController < ApplicationController
     else
       flash[:alert] = "更新できませんでした。"
       render :edit
-    end  
+    end
   end
 
   def destroy

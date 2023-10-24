@@ -1,73 +1,49 @@
 <div class="card-list-container py-5">
   <% @post_items.each do |post_item| %>
-  
-  <% if post_item.has_attribute?(:repost_item_user_id) %>
-    <% if post_item.repost_item_user_id.present? %>
-      <i class="fa-solid fa-repeat"></i><%= post_item.repost_item_user_nickname %>さんがリポスト
-      <div class="card mx-auto mt-4 shadow-lg" style="width: 55rem;">
-        <%= link_to post_item_path(post_item.id) do %>
-          <%= image_tag post_item.get_image, class:"card-img-top"; %>
-        <% end %>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-2">
-              <%= link_to user_path(post_item.user.id) do %>
-                <%= image_tag post_item.user.get_profile_image(100,100), class:"mt-3 rounded-circle"; %>
+    <div class="card mx-auto mt-4 shadow-lg" style="width: 55rem;">
+      <%= link_to post_item_path(post_item.id) do %>
+        <%= image_tag post_item.get_image, class:"card-img-top"; %>
+      <% end %>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-5 offset-2">
+          <% if post_item.has_attribute?(:repost_item_user_id) %>
+            <% if post_item.repost_item_user_id.present? %>
+              <% if post_item.repost_item_user_id == current_user.id %>
+                <i class="fa-solid fa-repeat"></i><%= post_item.repost_item_user_nickname %>さんがリポスト
+              <% else %>
               <% end %>
-            </div>
-            <div class="col-10">
-              <p class="card-title">
-                <strong><%= post_item.user.nickname %> (<%= post_item.user.user_name %>) </strong>
-              </p>
-              <p class="card-text">
-                <%= post_item.post_item %>
-              </p>
-              <p>
-                <i class="fa-solid fa-location-dot"></i>
-                <span><%= post_item.address %></span>
-              </p>
-              <span>
-                <%= link_to "#{post_item.post_comments.count}コメント |", post_item_path(post_item.id), class:"text-dark" %>
-                <i class="fa-solid fa-repeat"></i><%= post_item.repost_items.count %>
-                <i class="fa-solid fa-heart"></i><%= post_item.favorites.count %>
-              </span>
-            </div>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-2">
+            <%= link_to user_path(post_item.user.id) do %>
+              <%= image_tag post_item.user.get_profile_image(100,100), class:"mt-3 rounded-circle"; %>
+            <% end %>
+          </div>
+          <div class="col-10">
+            <p class="card-title">
+              <strong><%= post_item.user.nickname %> (<%= post_item.user.user_name %>) </strong>
+              <%= post_item.created_at.strftime('%Y/%m/%d') %>
+            </p>
+            <p class="card-text">
+              <%= post_item.post_item %>
+            </p>
+            <p>
+              <i class="fa-solid fa-location-dot"></i>
+              <span><%= post_item.address %></span>
+            </p>
+            <span>
+              <%= link_to "#{post_item.post_comments.count}コメント |", post_item_path(post_item.id), class:"text-dark" %>
+              <i class="fa-solid fa-repeat"></i><%= post_item.repost_items.count %>
+              <i class="fa-solid fa-heart"></i><%= post_item.favorites.count %>
+            </span>
           </div>
         </div>
       </div>
-    <% end %>
-  <% end %>  
-    
-  <div class="card mx-auto mt-4 shadow-lg" style="width: 55rem;">
-    <%= link_to post_item_path(post_item.id) do %>
-      <%= image_tag post_item.get_image, class:"card-img-top"; %>
-    <% end %>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-2">
-          <%= link_to user_path(post_item.user.id) do %>
-            <%= image_tag post_item.user.get_profile_image(100,100), class:"mt-3 rounded-circle"; %>
-          <% end %>
-        </div>
-        <div class="col-10">
-          <p class="card-title">
-            <strong><%= post_item.user.nickname %> (<%= post_item.user.user_name %>) </strong>
-          </p>
-          <p class="card-text">
-            <%= post_item.post_item %>
-          </p>
-          <p>
-            <i class="fa-solid fa-location-dot"></i>
-            <span><%= post_item.address %></span>
-          </p>
-          <span>
-            <%= link_to "#{post_item.post_comments.count}コメント |", post_item_path(post_item.id), class:"text-dark" %>
-            <i class="fa-solid fa-repeat"></i><%= post_item.repost_items.count %>
-            <i class="fa-solid fa-heart"></i><%= post_item.favorites.count %>
-          </span>
-        </div>
-      </div>
     </div>
-  </div>
   <% end %>
 </div>
