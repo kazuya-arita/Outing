@@ -57,8 +57,14 @@ class User < ApplicationRecord
 
   #リポストした投稿を取得するメソッド
   def post_items_with_repost_items
-    relation = PostItem.joins("LEFT OUTER JOIN repost_items ON post_items.id = repost_items.id AND repost_items.user_id = #{self.id}").select("post_items.*, repost_items.user_id AS repost_item_user_id, (SELECT nickname FROM users WHERE id = repost_item_user_id) AS repost_item_user_nickname")
-    relation.where(user_id: self.id).or(relation.where("repost_items.user_id = ?", self.id)).with_attached_image.preload(:user, :comments, :favorites, :repost_items).order(Arel.sql("CASE WHEN repost_items.created_at IS NULL THEN post_items.created_at ELSE repost_items.created_at END"))
+    relation = PostItem.joins("LEFT OUTER JOIN repost_items ON post_items.id = repost_items.id AND repost_items.user_id = #{self.id}")
+    .select("post_items.*, repost_items.user_id AS repost_item_user_id, (SELECT nickname FROM users WHERE id = repost_item_user_id) AS repost_item_user_nickname")
+
+    relation.where(user_id: self.id)
+            .or(relation.where("repost_items.user_id = ?", self.id))
+            .with_attached_image
+            .preload(:user, :comments, :favorites, :repost_items)
+            .order(Arel.sql("CASE WHEN repost_items.created_at IS NULL THEN post_items.created_at ELSE repost_items.created_at END"))
   end
 
   #フォロー時の通知の処理
