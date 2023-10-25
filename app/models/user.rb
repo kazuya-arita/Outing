@@ -68,12 +68,19 @@ class User < ApplicationRecord
             .order(Arel.sql("CASE WHEN repost_items.created_at IS NULL THEN post_items.created_at ELSE repost_items.created_at END"))
   end
   
+  #フォローしている人とユーザー本人を取得するメソッド
+  def followings_with_userself
+    User.where(id: self.followings.pluck(:id)).or(User.where(id: self.id))
+  end
+  
   #フォローしている人がリポストした投稿を取得するメソッド
   def followings_post_items_with_repost_items
     relation = PostItem.joins("LEFT OUTER JOIN post_items.id = repost_items.post_item_id AND (repost_items.user_id = #{self.id} OR repost_items.user_id IN (SELECT follower_id FROM relationships WHERE user_id = #{self.id}))")
-                       .select()
+                       .select("post_items.*, repost_items.user_id AS repost_item_user_id, (SELECT nickname FROM users WHWRE id = repost_item_user_id) AS repost_item_user_nickname")
                        
-    relation                   
+    relation.where(user_id: self.followings_with_userself.pluck(:id))
+            .or(relation.where(id: RepostItem.where(user_id: self.followings_with_userself.pluck(:id)).distinct.pluck(:post_item_id)))
+            .where("NOT EXISTS(SELECT 1 FROM repost_items sub WHERE repost_items.post_item_id = sub.post_item_id AND repost_items.created_at < sub.created_at)")
   end
 
   #フォロー時の通知の処理
