@@ -57,31 +57,35 @@ class User < ApplicationRecord
 
   #リポストした投稿を取得するメソッド
   def post_items_with_repost_items
-    relation = PostItem.joins("LEFT OUTER JOIN repost_items ON post_items.id = repost_items.post_item_id")
+    relation = PostItem.joins("LEFT OUTER JOIN repost_items ON post_items.id = repost_items.post_item_id AND repost_items.user_id = #{self.id}")
                        .joins("LEFT OUTER JOIN users ON repost_items.user_id = users.id")
                        .select("post_items.*, repost_items.user_id AS repost_item_user_id, users.nickname AS repost_item_user_nickname")
 
     relation.where(user_id: self.id)
             .or(relation.where("repost_items.user_id = ?", self.id))
-            .with_attached_image
             .preload(:user, :post_comments, :favorites, :repost_items)
-            .order(Arel.sql("CASE WHEN repost_items.created_at IS NULL THEN post_items.created_at ELSE repost_items.created_at END"))
+            .order(Arel.sql("CASE WHEN repost_items.created_at IS NULL THEN post_items.created_at ELSE repost_items.created_at END DESC, post_items.created_at DESC"))
   end
-  
+
   #フォローしている人とユーザー本人を取得するメソッド
   def followings_with_userself
     User.where(id: self.followings.pluck(:id)).or(User.where(id: self.id))
   end
-  
+
   #フォローしている人がリポストした投稿を取得するメソッド
   def followings_post_items_with_repost_items
-    relation = PostItem.joins("LEFT OUTER JOIN post_items.id = repost_items.post_item_id AND (repost_items.user_id = #{self.id} OR repost_items.user_id IN (SELECT follower_id FROM relationships WHERE user_id = #{self.id}))")
-                       .select("post_items.*, repost_items.user_id AS repost_item_user_id, (SELECT nickname FROM users WHWRE id = repost_item_user_id) AS repost_item_user_nickname")
-                       
+    relation = PostItem.joins("LEFT OUTER JOIN repost_items ON post_items.id = repost_items.post_item_id AND (repost_items.user_id = #{self.id} OR repost_items.user_id IN (SELECT follower_id FROM relationships WHERE user_id = #{self.id}))")
+                       .joins("LEFT OUTER JOIN users ON repost_items.user_id = users.id")
+                       .select("post_items.*, repost_items.user_id AS repost_item_user_id, users.nickname AS repost_item_user_nickname")
+                       #.select("post_items.*, repost_items.user_id AS repost_item_user_id, (SELECT nickname FROM users WHERE id = repost_items.user_id) AS repost_item_user_nickname")
+
     relation.where(user_id: self.followings_with_userself.pluck(:id))
             .or(relation.where(id: RepostItem.where(user_id: self.followings_with_userself.pluck(:id)).distinct.pluck(:post_item_id)))
             .where("NOT EXISTS(SELECT 1 FROM repost_items sub WHERE repost_items.post_item_id = sub.post_item_id AND repost_items.created_at < sub.created_at)")
+            .preload(:user, :post_comments, :favorites, :repost_items)
+            .order(Arel.sql("CASE WHEN repost_items.created_at IS NULL THEN post_items.created_at ELSE repost_items.created_at END DESC, post_items.created_at DESC"))
   end
+
 
   #フォロー時の通知の処理
   def create_notification_follow!(current_user)

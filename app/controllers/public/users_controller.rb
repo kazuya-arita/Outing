@@ -3,7 +3,7 @@ class Public::UsersController < ApplicationController
 
   def show
     #@user = User.find(params[:id])
-    @post_items = @user.post_items_with_repost_items
+    @post_items = @user.post_items_with_repost_items.limit(50)
   end
 
   def edit

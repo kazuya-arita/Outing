@@ -9,10 +9,7 @@
           <div class="col-5 offset-2">
           <% if post_item.has_attribute?(:repost_item_user_id) %>
             <% if post_item.repost_item_user_id.present? %>
-              <% if post_item.repost_item_user_id == current_user.id %>
-                <i class="fa-solid fa-repeat"></i><%= post_item.repost_item_user_nickname %>さんがリポスト
-              <% else %>
-              <% end %>
+              <i class="fa-solid fa-repeat"></i><%= post_item.repost_item_user_nickname %>さんがリポスト
             <% end %>
           <% end %>
           </div>
