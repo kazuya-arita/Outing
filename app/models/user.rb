@@ -67,17 +67,16 @@ class User < ApplicationRecord
             .order(Arel.sql("CASE WHEN repost_items.created_at IS NULL THEN post_items.created_at ELSE repost_items.created_at END DESC, post_items.created_at DESC"))
   end
 
-  #フォローしている人とユーザー本人を取得するメソッド
+  #フォローしている人とユーザー本人の投稿を取得するメソッド
   def followings_with_userself
     User.where(id: self.followings.pluck(:id)).or(User.where(id: self.id))
   end
 
   #フォローしている人がリポストした投稿を取得するメソッド
   def followings_post_items_with_repost_items
-    relation = PostItem.joins("LEFT OUTER JOIN repost_items ON post_items.id = repost_items.post_item_id AND (repost_items.user_id = #{self.id} OR repost_items.user_id IN (SELECT follower_id FROM relationships WHERE user_id = #{self.id}))")
+    relation = PostItem.joins("LEFT OUTER JOIN repost_items ON post_items.id = repost_items.post_item_id AND (repost_items.user_id = #{self.id} OR repost_items.user_id IN (SELECT followed_id FROM relationships WHERE follower_id = #{self.id}))")
                        .joins("LEFT OUTER JOIN users ON repost_items.user_id = users.id")
                        .select("post_items.*, repost_items.user_id AS repost_item_user_id, users.nickname AS repost_item_user_nickname")
-                       #.select("post_items.*, repost_items.user_id AS repost_item_user_id, (SELECT nickname FROM users WHERE id = repost_items.user_id) AS repost_item_user_nickname")
 
     relation.where(user_id: self.followings_with_userself.pluck(:id))
             .or(relation.where(id: RepostItem.where(user_id: self.followings_with_userself.pluck(:id)).distinct.pluck(:post_item_id)))
