@@ -1,17 +1,14 @@
 class Public::UsersController < ApplicationController
-  before_action :set_user #, only: [:favorites]
+  before_action :set_user
 
   def show
-    #@user = User.find(params[:id])
     @post_items = @user.post_items_with_repost_items.limit(50)
   end
 
   def edit
-    @user = current_user
   end
 
   def update
-    @user = current_user
     if @user.update(user_params)
       flash[:notice] = "更新しました。"
       redirect_to user_path(@user.id)
@@ -22,19 +19,29 @@ class Public::UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     redirect_to post_items_path
   end
 
   def confirm
-    @user = current_user
   end
 
   def favorites
     favorites = Favorite.order('created_at DESC').limit(50).where(user_id: @user.id).pluck(:post_item_id)
     @favorite_post_items = PostItem.find(favorites)
   end
+  
+  def release
+    @user.released! unless @user.released?
+    flash[:notice] = "アカウントを公開しました。"
+    redirect_to user_path(@user.id)
+  end
+  
+  def nonrelease
+    @user.nonreleased! unless @user.nonreleased?
+    flash[:notice] = "アカウントを非公開にしました。"
+    redirect_to user_path(@user.id)
+  end  
 
   private
 

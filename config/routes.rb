@@ -38,6 +38,8 @@ get "admin/search" => "admin/searchs#search"
 
   #public/usersコントローラー
   get "users/confirm" => "public/users#confirm"
+  patch "users/nonrelease/:id" => "public/users#nonrelease"
+  patch "users/release/:id" => "public/users#release"
   scope module: :public do
     resources :users, only: [:show, :edit, :update, :destroy] do
       resource :relationships, only: [:create, :destroy]
