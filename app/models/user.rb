@@ -87,7 +87,6 @@ class User < ApplicationRecord
             .order(Arel.sql("CASE WHEN repost_items.created_at IS NULL THEN post_items.created_at ELSE repost_items.created_at END DESC, post_items.created_at DESC"))
   end
 
-
   #フォロー時の通知の処理
   def create_notification_follow!(current_user)
     temp = Notofication.where(["visitor_id = ? and visited_id = ? and action = ? ", current_user.id, id, 'follow'])

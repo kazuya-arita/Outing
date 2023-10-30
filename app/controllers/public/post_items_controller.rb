@@ -7,7 +7,7 @@ class Public::PostItemsController < ApplicationController
       @user = User.find(current_user.id)
       @post_items = @user.followings_post_items_with_repost_items.limit(50)
     else
-      @post_items = PostItem.all.order('created_at DESC').limit(50)
+      @post_items = PostItem.hide_nonreleased_post_items.limit(50)
     end
   end
 
