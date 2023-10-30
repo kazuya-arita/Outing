@@ -30,7 +30,6 @@ class Public::PostItemsController < ApplicationController
   def show
     @post_item = PostItem.find(params[:id])
     @post_comment = PostComment.new
-    @user = User.find(params[:id])
   end
 
   def destroy

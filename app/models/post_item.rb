@@ -67,4 +67,6 @@ class PostItem < ApplicationRecord
     PostItem.joins(:user).where(user: { status: "released"}).order('created_at DESC')
   end
 
+  
+
 end
