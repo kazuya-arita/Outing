@@ -53,6 +53,11 @@ get "admin/search" => "admin/searchs#search"
 
   #public/searchsコントローラー
   get "search" => "public/searchs#search"
+  
+  #public/notificationsコントローラー
+  scope module: :public do
+    resources :notifications, only: [:index]
+  end  
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

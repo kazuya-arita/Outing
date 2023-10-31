@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <%= link_to user_path(notification.visitor) do %>
+        <%= image_tag @user.get_profile_image(100, 100), class:"icon_mini" %>
+        <strong><%= notification.visitor.name %></strong>
+      <% end%>  
+      <p>さんが</p>
+      
+      <% case notification.action %>
+        
+    </div>
+  </div>
+</div>
