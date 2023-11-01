@@ -45,7 +45,7 @@ class PostItem < ApplicationRecord
   end
 
   def create_notification_comment!(current_user, post_comment_id)
-    temp_ids = Comment.select(:user_id).where(post_item_id: id).where.not(user_id: current_user.id).distinct
+    temp_ids = PostComment.select(:user_id).where(post_item_id: id).where.not(user_id: current_user.id).distinct
     temp_ids.each do |temp_id|
       save_notification_comment!(current_user, post_comment_id, temp_id['user_id'])
     end
@@ -54,7 +54,7 @@ class PostItem < ApplicationRecord
 
   def save_notification_comment!(current_user, post_comment_id, user_id)
     #コメントは複数回することがあるため、１つの投稿に複数回通知する
-    notification = current_user.active_notifications.new(post_item_id: id, post_comment_id: post_comment_id, visited_id: visited_id, action: 'comment')
+    notification = current_user.active_notifications.new(post_item_id: id, post_comment_id: post_comment_id, visited_id: user_id, action: 'comment')
     #自分の投稿に自分でコメントする場合は通知済みにする
     if notification.visitor_id == notification.visited_id
       notification.checked = true

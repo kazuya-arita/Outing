@@ -30,7 +30,7 @@ get "admin/search" => "admin/searchs#search"
   #public/post_itemsコントローラー
   scope module: :public do
     resources :post_items, only: [:index, :new, :create, :show, :destroy ] do
-      resources :post_comments, only: [:create]
+      resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
       resource :repost_items, only: [:create, :destroy]
     end

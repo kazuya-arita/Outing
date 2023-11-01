@@ -24,7 +24,7 @@
           <% end %>
         <% end %>
         <p>にコメントしました</p>
-        <p class="text-muted mb-0"><%= Comment.find_by(id: notification.comment_id)&.comment %></p>
+        <p class="text-muted mb-0"><%= PostComment.find_by(id: notification.post_comment_id)&.comment %></p>
       <% end %>
 
       <div class="small text-muted text-right">
