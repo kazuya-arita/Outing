@@ -32,10 +32,10 @@ class PostItem < ApplicationRecord
 
   def create_notification_favorite!(current_user)
     #すでにいいねされているか検索
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and post_item_id = ? and action = ? ", current_user.id, user_id, id, 'favorite'])
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and post_item_id = ? and action = ? ", current_user.id, user_id, id, "favorite"])
 
     if temp.blank?
-      notification = current_user.active_notificatons.new(post_id: id, visited_id: user_id, action: favorite)
+      notification = current_user.active_notifications.new(post_item_id: id, visited_id: user_id, action: "favorite")
       #自分が投稿したものに自分でいいねした場合は通知済みにする
       if notification.visitor_id == notification.visited_id
         notification.checked = true
@@ -67,6 +67,6 @@ class PostItem < ApplicationRecord
     PostItem.joins(:user).where(user: { status: "released"}).order('created_at DESC')
   end
 
-  
+
 
 end

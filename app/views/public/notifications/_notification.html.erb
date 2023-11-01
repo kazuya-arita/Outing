@@ -2,13 +2,34 @@
   <div class="row">
     <div class="col-6">
       <%= link_to user_path(notification.visitor) do %>
-        <%= image_tag @user.get_profile_image(100, 100), class:"icon_mini" %>
-        <strong><%= notification.visitor.name %></strong>
-      <% end%>  
+        <%= image_tag notification.visitor.get_profile_image(100, 100), class:"icon_mini" %>
+        <strong><%= notification.visitor.nickname %></strong>
+      <% end%>
       <p>さんが</p>
-      
+
       <% case notification.action %>
-        
+      <% when "follow" then %>
+        <p>あなたをフォローしました</p>
+      <% when "favorite" then %>
+        <%= link_to "あなたの投稿", post_item_path(notification.post_item) %>
+        <p>にいいねしました</p>
+      <% when "comment" then %>
+        <% if notification.post_item.user_id == notification.visited.id %>
+          <%= link_to "あなたの投稿", post_item_path(notification.post_item), class: "font-weight: bold;" %>
+        <% else %>
+          <%= link_to post_item_path(notification.post_item) do %>
+            <%= image_tag notification.post_item.user.get_profile_image(100, 100), class:"icon_mini" %>
+            <strong><%= notification.post_item.user.nickname %></strong>
+            <p>さんの投稿</p>
+          <% end %>
+        <% end %>
+        <p>にコメントしました</p>
+        <p class="text-muted mb-0"><%= Comment.find_by(id: notification.comment_id)&.comment %></p>
+      <% end %>
+
+      <div class="small text-muted text-right">
+        <%= time_ago_in_words(notification.created_at).upcase %>
+      </div>
     </div>
   </div>
 </div>
