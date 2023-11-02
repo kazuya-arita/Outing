@@ -3,22 +3,14 @@ class Public::RepostItemsController < ApplicationController
   before_action :set_post_item
 
   def create
-    if RepostItem.find_by(user_id: current_user.id, post_item_id: @post_item.id)
-      redirect_to post_items_path, alert: "既にリポスト済みです。"
-    else
-      @repost_item = RepostItem.create(user_id: current_user.id, post_item_id: @post_item.id)
-      redirect_to post_item_path(@post_item.id)
-    end
+    @repost_item = RepostItem.create(user_id: current_user.id, post_item_id: @post_item.id)
+    redirect_to post_item_path(@post_item.id)
   end
 
   def destroy
     @repost_item = current_user.repost_items.find_by(post_item: @post_item.id)
-    if @repost_item.present?
-      @repost_item.destroy
-      redirect_to post_item_path(@post_item.id)
-    else
-      redirect_to post_items_path, alert: "既にリポストを取り消し済みです。"
-    end
+    @repost_item.destroy
+    redirect_to post_item_path(@post_item.id)
   end
 
   private

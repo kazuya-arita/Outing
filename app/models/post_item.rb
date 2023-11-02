@@ -61,6 +61,18 @@ class PostItem < ApplicationRecord
     end
     notification.save if notification.valid?
   end
+  
+  #リポスト時の通知の処理
+  def create_notification_repost_item!(current_user)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and post_item_id = ? action = ? ", current_user.id, user_id, id, 'repost'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(post_item_id: id, visited_id: user_id, action: 'repost')
+      if notification.visitor_id == notification.visited_id
+        notification.checked = true
+      end
+      notification.save if notification.valid?
+    end
+  end
 
    #非公開アカウントの投稿を表示させない
   def self.hide_nonreleased_post_items
