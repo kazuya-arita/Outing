@@ -18,7 +18,7 @@
           <%= link_to "あなたの投稿", post_item_path(notification.post_item), class: "font-weight: bold;" %>
         <% else %>
           <%= link_to post_item_path(notification.post_item) do %>
-            <%= image_tag notification.post_item.user.get_profile_image(100, 100), class:"icon_mini" %>
+            <%= image_tag notification.post_item.user.get_profile_image(40, 40), class:"rounded-circle" %>
             <strong><%= notification.post_item.user.nickname %></strong>
             <%= "さんの投稿" %>
           <% end %>
