@@ -25,6 +25,9 @@
         <% end %>
         <%= "にコメントしました" %>
         <p class="text-muted mb-0"><%= PostComment.find_by(id: notification.post_comment_id)&.comment %></p>
+      <% when "repost_item" then %>
+        <%= link_to "あなたの投稿", post_item_path(notification.post_item) %>
+        <%= "をリポストしました" %>
       <% end %>
 
       <div class="small text-muted text-right">

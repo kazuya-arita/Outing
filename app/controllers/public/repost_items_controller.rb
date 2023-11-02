@@ -4,6 +4,8 @@ class Public::RepostItemsController < ApplicationController
 
   def create
     @repost_item = RepostItem.create(user_id: current_user.id, post_item_id: @post_item.id)
+    @post_item = PostItem.find(params[:post_item_id])
+    @post_item.create_notification_repost_item!(current_user)
     redirect_to post_item_path(@post_item.id)
   end
 
