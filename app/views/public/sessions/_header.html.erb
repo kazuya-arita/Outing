@@ -29,9 +29,11 @@
 
         <div class="col-1 d-flex align-items-center">
          <%= link_to notifications_path, class: 'text-dark' do %>
-         
+          <% if unchecked_notifications? %>
+           <h4><i class="fa-solid fa-bell notice"></i></h4>
+          <% else %>
            <h4><i class="fa-solid fa-bell"></i></h4>
-          
+          <% end %>
          <% end %>
         </div>
 

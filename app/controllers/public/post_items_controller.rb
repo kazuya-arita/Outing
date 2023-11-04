@@ -41,7 +41,7 @@ class Public::PostItemsController < ApplicationController
   private
 
   def post_item_params
-    params.require(:post_item).permit(:image, :post_item, :address, :user_id)
+    params.require(:post_item).permit(:image, :post_item, :address, :user_id, :lat, :lng)
   end
 
 end
