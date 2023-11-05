@@ -28,8 +28,12 @@ get "admin/search" => "admin/searchs#search"
   }
 
   #public/post_itemsコントローラー
+  
   scope module: :public do
     resources :post_items, only: [:index, :new, :create, :show, :destroy ] do
+      member do
+        get "location" 
+      end  
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
       resource :repost_items, only: [:create, :destroy]
@@ -53,11 +57,11 @@ get "admin/search" => "admin/searchs#search"
 
   #public/searchsコントローラー
   get "search" => "public/searchs#search"
-  
+
   #public/notificationsコントローラー
   scope module: :public do
     resources :notifications, only: [:index]
-  end  
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,46 @@
+<%= render "public/sessions/header" %>
+
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-1">
+      <h5>
+        <%= link_to post_item_path(@post_item.id) do %>
+          <i class="fa-solid fa-reply"></i>
+        <% end %>   
+      </h5>
+    </div>
+    <div class="col-5 offset-3">
+      <h5>投稿された写真の場所はこちらです</h5>
+    </div>
+  </div>
+</div>  
+      
+<div id='map'></div>
+
+<style>
+#map {
+  height: 600px;
+  width: 100%;
+}
+</style>
+
+<!-- js部分 -->
+<script>
+//初期マップの設定
+let map
+let marker
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center:  {lat: <%= @post_item.lat %>, lng: <%= @post_item.lng %>},
+    zoom: 15,
+  });
+
+   marker = new google.maps.Marker({
+    position:  {lat: <%= @post_item.lat %>, lng: <%= @post_item.lng %>},
+    map: map
+  });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR3k8za8plwoDN2g8e2icPD1h1LJOPcdQ&callback=initMap" async defer></script>

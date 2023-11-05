@@ -30,8 +30,10 @@
               <%= post_item.post_item %>
             </p>
             <p>
-              <i class="fa-solid fa-location-dot"></i>
-              <span><%= post_item.address %></span>
+              <span>
+                <i class="fa-solid fa-location-dot"></i>
+                <%= post_item.address %>
+              </span>
             </p>
             <span>
               <%= link_to "#{post_item.post_comments.count}コメント |", post_item_path(post_item.id), class:"text-dark" %>

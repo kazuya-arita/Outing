@@ -25,10 +25,12 @@
       </div>
 
       <div class="col-10 offset-1 mb-3">
-        <h5><label>場所を選択</label></h5>
+        <h5><label>場所を入力</label></h5>
           <%= f.text_field :address %>
+          <%= f.hidden_field :lat,:value =>"緯度", id: :lat %>
+          <%= f.hidden_field :lng,:value =>"経度", id: :lng %>
 
-        <h2>Map</h2>
+        <h5>Map(場所を検索して表示させてください。)</h5>
 
         <input id="address" type="textbox" value="GeekSalon">
         <input type="button" value="検索" onclick="codeAddress()">

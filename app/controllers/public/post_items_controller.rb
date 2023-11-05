@@ -37,6 +37,10 @@ class Public::PostItemsController < ApplicationController
     post_item.destroy
     redirect_to post_items_path
   end
+  
+  def location
+    @post_item = PostItem.find(params[:id])
+  end  
 
   private
 
