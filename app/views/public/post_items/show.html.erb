@@ -1,5 +1,9 @@
 <%= render "public/sessions/header" %>
 
+<% flash.each do |message_type, message| %>
+  <div class="flash-message <%= message_type %>"><%= message %></div>
+<% end %>
+
 <div class="card-list-container py-5">
   <div class="card mx-auto mt-4 shadow-lg" style="width: 55rem;">
     <%= image_tag @post_item.get_image, class:"card-img-top"; %>
@@ -24,7 +28,7 @@
             <i class="fa-solid fa-location-dot"></i>
             <%= link_to location_post_item_path(@post_item.id) do %>
               <%= @post_item.address %>
-            <% end %>  
+            <% end %>
           </p>
           <span>
             <div>

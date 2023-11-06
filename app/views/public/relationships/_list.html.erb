@@ -2,7 +2,6 @@
   <div class="row">
     <div class="col-8 offset-2">
       <% if @users.exists? %>
-        <% @users.each do |user| %>
           <div class="table">
             <table>
               <thead>
@@ -14,7 +13,9 @@
                   <th></th>
                 </tr>
               </thead>
+
               <tbody>
+        　　　   　<% @users.each do |user| %>
                 <tr>
                   <td>
                     <%= link_to user_path(user.id) do %>
@@ -26,10 +27,10 @@
                   <td>フォロー数: <%= user.followings.count %></td>
                   <td>フォロワー数: <%= user.followers.count %></td>
                 </tr>
+                <% end %>
               </tbody>
             </table>
           </div>
-        <% end %>
       <% else %>
         <p>ユーザーはいません</p>
       <% end %>

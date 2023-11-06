@@ -1,2 +1,22 @@
 <%= render "public/sessions/header" %>
-<%= render "public/post_items/list" %>
+
+<% flash.each do |message_type, message| %>
+  <div class="flash-message <%= message_type %>"><%= message %></div>
+<% end %>
+
+<% if @post_items.exists? %>
+  <%= render "public/post_items/list" %>
+<% else %>
+  <div class="bg-info mt-1">
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-6 offset-3">
+          <h3>投稿がまだありません。<br>他のユーザーのフォローや投稿をしてタイムラインを充実させましょう！</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <%= image_tag "background.jpg", class: "back" %>
+  </div>
+<% end %>

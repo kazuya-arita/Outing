@@ -13,7 +13,7 @@ class Public::UsersController < ApplicationController
       flash[:notice] = "更新しました。"
       redirect_to user_path(@user.id)
     else
-      flash[:alert] = "更新できませんでした。"
+      flash.now[:alert] = "更新できませんでした。"
       render :edit
     end
   end
@@ -30,18 +30,18 @@ class Public::UsersController < ApplicationController
     favorites = Favorite.order('created_at DESC').limit(50).where(user_id: @user.id).pluck(:post_item_id)
     @favorite_post_items = PostItem.find(favorites)
   end
-  
+
   def release
     @user.released! unless @user.released?
     flash[:notice] = "アカウントを公開しました。"
     redirect_to user_path(@user.id)
   end
-  
+
   def nonrelease
     @user.nonreleased! unless @user.nonreleased?
     flash[:notice] = "アカウントを非公開にしました。"
     redirect_to user_path(@user.id)
-  end  
+  end
 
   private
 
