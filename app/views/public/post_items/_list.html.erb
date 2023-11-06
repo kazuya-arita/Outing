@@ -1,6 +1,6 @@
 <div class="card-list-container py-5">
   <% @post_items.each do |post_item| %>
-    <div class="card mx-auto mt-4 shadow-lg" style="width: 55rem;">
+    <div class="card mx-auto mt-4 shadow-lg" style="width: 80%">
       <%= link_to post_item_path(post_item.id) do %>
         <%= image_tag post_item.get_image, class:"card-img-top"; %>
       <% end %>
