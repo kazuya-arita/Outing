@@ -19,13 +19,18 @@
 
     <div class="col-3 d-flex align-items-center ml-5">
       <h5>
-        ニックネーム：<%= @user.nickname %><br>
-        ユーザー名：<%= @user.user_name %>
+        ニックネーム：<%= @user.nickname %>
+        <% if @user.nonreleased? %>
+          <i class="fa-solid fa-lock"></i>
+        <% end %><br>
+        ユーザー名：<%= @user.user_name %><br>
+        フォロー数：<%= @user.followings.count %><br>
+        フォロワー数: <%= @user.followers.count %>
       </h5>
     </div>
 
     <div class="col-2 offset-4 d-flex align-items-center">
-      <h5><%= link_to "編集する", edit_admin_user_path(@user.id), class: "btn btn-success" %></h5>
+      <h5><%= link_to "管理する", edit_admin_user_path(@user.id), class: "btn btn-success" %></h5>
     </div>
   </div>
 

@@ -3,7 +3,7 @@
     <div class="row">
 
        <% if user_signed_in? %>
-        <div class="col-12 col-md-12 col-lg-2 d-flex align-items-center">
+        <div class="col-12 col-md-12 col-lg-2 text-center">
          <%= link_to post_items_path, class: 'text-dark' do %>
            <%= image_tag 'Outing.jpg' %>
          <% end %>
@@ -47,7 +47,7 @@
           <%= render "public/searchs/form" %>
         </div>
        <% else %>
-        <div class="col-2 text-center">
+        <div class="col-12 col-md-12 col-lg-2 text-center">
          <%= link_to post_items_path, class: 'nav-link text-dark' do %>
           <%= image_tag 'Outing.jpg' %>
          <% end %>
@@ -59,7 +59,7 @@
          <% end %>
         </div>
 
-        <div class="col-1 d-flex align-items-center">
+        <div class="col-1 d-flex align-items-center offset-1">
          <%= link_to new_user_session_path, class: 'nav-link text-dark' do %>
           <h4><i class="fa-solid fa-right-to-bracket"></i></h4>
          <% end %>
