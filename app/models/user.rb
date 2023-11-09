@@ -101,4 +101,5 @@ class User < ApplicationRecord
   length: {maximum: 10 },
   format: { with: /\A@[a-z0-9]+\z/, message: 'は@を先頭に小文字英数字で入力してください。' }
 
+  validates :nickname, presence: true
 end

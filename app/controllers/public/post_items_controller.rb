@@ -34,13 +34,19 @@ class Public::PostItemsController < ApplicationController
 
   def destroy
     post_item = PostItem.find(params[:id])
-    post_item.destroy
+    if post_item.destroy
+      flash[:notice] = "投稿を削除しました。"
+      redirect_to admin_path
+    else
+      flash.now[:alert] = "投稿を削除できませんでした。"
+      render :show
+    end
     redirect_to post_items_path
   end
-  
+
   def location
     @post_item = PostItem.find(params[:id])
-  end  
+  end
 
   private
 

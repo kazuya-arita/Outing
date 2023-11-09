@@ -26,6 +26,9 @@ ja:
         unlock_token: ロック解除用トークン
         updated_at: 更新日
         user_name: ユーザーネーム
+        nickname: ニックネーム
+      admin:
+        email: Eメール
     models:
       user: ユーザー
   devise:
