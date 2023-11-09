@@ -17,7 +17,6 @@ class Admin::HomesController < ApplicationController
       flash.now[:alert] = "投稿を削除できませんでした。"
       render :show
     end
-    redirect_to admin_path
   end
 
 end

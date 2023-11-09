@@ -22,7 +22,7 @@ class Public::PostItemsController < ApplicationController
       flash[:notice] = "投稿しました。"
       redirect_to post_items_path
     else
-      flash.now[:alert] = "投稿できませんでした。"
+      flash.now[:alert] = "投稿できませんでした。写真と場所が入力されているか確認してください。"
       render :new
     end
   end
@@ -36,12 +36,11 @@ class Public::PostItemsController < ApplicationController
     post_item = PostItem.find(params[:id])
     if post_item.destroy
       flash[:notice] = "投稿を削除しました。"
-      redirect_to admin_path
+      redirect_to post_items_path
     else
       flash.now[:alert] = "投稿を削除できませんでした。"
       render :show
     end
-    redirect_to post_items_path
   end
 
   def location

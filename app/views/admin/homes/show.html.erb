@@ -13,6 +13,7 @@
         <div class="col-10">
           <p class="card-title">
             <strong><%= @post_item.user.nickname %> (<%= @post_item.user.user_name %>) </strong>
+            <%= link_to "不適切な投稿を削除", admin_home_path(@post_item.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
           </p>
           <p class="card-text">
             <%= @post_item.post_item %>
