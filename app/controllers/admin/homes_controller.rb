@@ -12,6 +12,7 @@ class Admin::HomesController < ApplicationController
     post_item = PostItem.find(params[:id])
     if post_item.destroy
       flash[:notice] = "不適切な投稿を削除しました。"
+      #post_item.create_notification_warning!(current_admin)
       redirect_to admin_path
     else
       flash.now[:alert] = "投稿を削除できませんでした。"
