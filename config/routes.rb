@@ -28,7 +28,6 @@ get "admin/search" => "admin/searchs#search"
   }
 
   #public/post_itemsコントローラー
-  
   scope module: :public do
     resources :post_items, only: [:index, :new, :create, :show, :destroy ] do
       member do
@@ -62,6 +61,11 @@ get "admin/search" => "admin/searchs#search"
   scope module: :public do
     resources :notifications, only: [:index]
   end
+  
+  #public/contactsコントローラー
+  scope module: :public do
+    resources :contacts, only: [:new, :create]
+  end  
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
