@@ -1,12 +1,6 @@
 <div class="container">
   <div class="row mt-2">
     <div class="col-7 mx-auto border-bottom">
-      <%# if notification.warning %>
-       <%# <p>
-          運営が<%= link_to "あなたの投稿", post_item_path(notification.post_item) %><%#を不適切な投稿と判断し、削除しました。
-          今後も同様の投稿があれば、アカウントが凍結される可能性があります。
-        </p>
-      <% end %>
       <%= link_to user_path(notification.visitor) do %>
         <%= image_tag notification.visitor.get_profile_image(40, 40), class: "rounded-circle"; %>
         <strong><%= notification.visitor.nickname %></strong>

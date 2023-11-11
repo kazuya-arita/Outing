@@ -31,6 +31,13 @@
   color: red;
 }
 
+.warning {
+  border-radius: 5px;
+  background-color: #ffd4d1;
+  color: #930403;
+  border: solid 1px #930403;
+}
+
 @media screen and (max-width:3000px){
   #map{
     width: 100%;

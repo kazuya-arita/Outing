@@ -1,6 +1,21 @@
 <%= render "public/sessions/header" %>
 
 <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+<% notifications.each do |notification| %>
+  <% if notification.warning %>
+    <div class="container">
+      <div class="row mt-2">
+        <div class="col-7 mx-auto border-bottom">
+          <p class="warning">
+            運営があなたの投稿を不適切な投稿と判断し、削除しました。
+            今後も同様の投稿があれば、アカウントが凍結される可能性があります。
+          </p>
+        </div>
+      </div>
+    </div>
+    <% break %>
+  <% end %>
+<% end %>
 <% if notifications.exists? %>
    <%= render notifications %>
 <% else %>
