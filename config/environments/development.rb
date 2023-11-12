@@ -44,7 +44,7 @@ Rails.application.configure do
     user_name:            ENV['SEND_MAIL'],
     password:             ENV['SEND_MAIL_PASSWORD'],
     authentication:       'plain',
-    enable_starttls_auto:  true
+    #enable_starttls_auto:  true
   }
 
   config.action_mailer.perform_caching = false
@@ -84,9 +84,9 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
-  
+
   config.hosts << "c9c53a389f5541599cd82ae11023183b.vfs.cloud9.ap-northeast-1.amazonaws.com"
-  
+
   config.active_job.queue_adapter = :inline
-  
+
 end

@@ -22,8 +22,8 @@ class Public::PostItemsController < ApplicationController
       flash[:notice] = "投稿しました。"
       redirect_to post_items_path
     else
-      flash.now[:alert] = "投稿できませんでした。写真と場所が入力されているか確認してください。"
-      render :new
+      flash[:alert] = "投稿できませんでした。写真と場所が入力されているか確認してください。"
+      redirect_to new_post_item_path
     end
   end
 

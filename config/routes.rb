@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+ # devise signup時のエラー解消
+ get "users" => redirect("/users/sign_up")
+
 #管理者用
 # URL /admin/sign_in ...
   devise_for :admin, skip: [:passwords, :registrations], controllers: {
@@ -31,8 +34,8 @@ get "admin/search" => "admin/searchs#search"
   scope module: :public do
     resources :post_items, only: [:index, :new, :create, :show, :destroy ] do
       member do
-        get "location" 
-      end  
+        get "location"
+      end
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
       resource :repost_items, only: [:create, :destroy]
@@ -61,11 +64,11 @@ get "admin/search" => "admin/searchs#search"
   scope module: :public do
     resources :notifications, only: [:index]
   end
-  
+
   #public/contactsコントローラー
   scope module: :public do
     resources :contacts, only: [:new, :create]
-  end  
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

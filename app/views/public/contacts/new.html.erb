@@ -1,0 +1,38 @@
+<%= render "public/sessions/header" %>
+
+<% flash.each do |message_type, message| %>
+  <div class="flash-message <%= message_type %>"><%= message %></div>
+<% end %>
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-8 col-sm-4 col-md-4 col-lg-3 offset-2 offset-lg-4 offset-md-4">
+      <div class="bg-primary rounded mb-3">
+        <h3>お問い合わせ</h3>
+      </div>
+    </div>
+
+    <div class="col-8 col-lg-4 offset-2 offset-lg-4 offset-md-4">
+      <%= form_with model: @contact do |f| %>
+        <div class="col-12 col-md-6 mb-3">
+          <%= f.label "名前" %><span class="necessary">*</span><br />
+          <%= f.text_field :name %>
+        </div>
+        
+        <div class="col-12 col-md-6 mb-3">
+          <%= f.label "メールアドレス" %><span class="necessary">*</span><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <div class="col-12 col-md-6 mb-3">
+          <%= f.label "お問い合わせ内容" %><span class="necessary">*</span><br />
+          <%= f.text_area :content %>
+        </div>
+
+        <div class="col-6 offset-1 d-flex align-items-center">
+          <h5><%= f.submit "送信する", class: "btn btn-success mr-5" %></h5>
+        </div
+      <% end %>
+    </div>
+  </div>
+</div>

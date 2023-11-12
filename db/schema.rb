@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2023_11_10_124139) do
   create_table "contacts", force: :cascade do |t|
     t.string "name", null: false
     t.text "content", null: false
+    t.string "email", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
