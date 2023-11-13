@@ -73,21 +73,24 @@ class PostItem < ApplicationRecord
       notification.save if notification.valid?
     end
   end
- 
+
  #運営からの警告通知の処理
   def create_notification_warning!(current_admin)
     temp = Notification.where(["visitor_id = ? and visited_id = ? and post_item_id = ? and action = ? ", current_admin.id, user_id, id, 'warning'])
     if temp.blank?
       notification = current_admin.active_warning_notifications.new(post_item_id: id, visited_id: user_id, action: 'warning')
       notification.save if notification.valid?
-    end  
-  end  
- 
+    end
+  end
+
    #非公開アカウントの投稿を表示させない
   def self.hide_nonreleased_post_items
     PostItem.joins(:user).where(user: { status: "released"}).order('created_at DESC')
   end
 
-
+  #ステータスが有効のユーザーの投稿のみ取得する
+  def self.active_user_post_items
+    PostItem.joins(:user).where(user: { is_active: "true"}).order('created_at DESC')
+  end
 
 end

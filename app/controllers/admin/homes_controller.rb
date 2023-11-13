@@ -3,7 +3,7 @@ class Admin::HomesController < ApplicationController
   before_action :authenticate_admin!
 
   def top
-    @post_items = PostItem.all.order('created_at DESC').limit(50)
+    @post_items = PostItem.active_user_post_items.limit(50)
   end
 
   def show
