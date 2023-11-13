@@ -71,20 +71,36 @@
 </div>
 
 <% if @user.released? %>
-  <%= render "public/post_items/list" %>
-<% else %>
-  <% if @user == current_user %>
+  <% if @user.is_active == true %>
     <%= render "public/post_items/list" %>
   <% else %>
-    <% if current_user.following?(@user) %>
+    <div class="d-flex align-items-center text-center" style="height:200px;">
+      <div class="container">
+        <h5><%= "このアカウントは無効のため、投稿を表示できません。" %></h5>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <% if @user.is_active == true %>
+    <% if @user == current_user %>
       <%= render "public/post_items/list" %>
     <% else %>
-      <div class="d-flex align-items-center text-center" style="height:200px;">
-        <div class="container">
-          <h5><%= "このアカウントは非公開です。" %></h5>
+      <% if current_user.following?(@user) %>
+        <%= render "public/post_items/list" %>
+      <% else %>
+        <div class="d-flex align-items-center text-center" style="height:200px;">
+          <div class="container">
+            <h5><%= "このアカウントは非公開です。" %></h5>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
+  <% else %>
+    <div class="d-flex align-items-center text-center" style="height:200px;">
+      <div class="container">
+        <h5><%= "このアカウントは無効のため、投稿を表示できません。" %></h5>
+      </div>
+    </div>
   <% end %>
 <% end%>
 

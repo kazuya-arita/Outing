@@ -11,8 +11,17 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to admin_path
+    if @user.update(user_params)
+      if @user.is_active == true
+        flash[:notice] = "ユーザーのステータスを有効にしました。"
+      else
+        flash[:alert] = "ユーザーのステータスを無効にしました。"
+      end
+      redirect_to admin_path
+    else
+      flash[:alert] = "ユーザーのステータスを更新できませんでした。"
+      redirect_to :edit
+    end
   end
 
   private

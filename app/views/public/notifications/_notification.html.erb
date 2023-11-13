@@ -1,19 +1,34 @@
 <div class="container">
   <div class="row mt-2">
     <div class="col-7 mx-auto border-bottom">
-      <%= link_to user_path(notification.visitor) do %>
-        <%= image_tag notification.visitor.get_profile_image(40, 40), class: "rounded-circle"; %>
-        <strong><%= notification.visitor.nickname %></strong>
-      <% end%>
-      <%= "さんが" %>
 
       <% case notification.action %>
       <% when "follow" then %>
+        <%= link_to user_path(notification.visitor) do %>
+          <%= image_tag notification.visitor.get_profile_image(40, 40), class: "rounded-circle"; %>
+          <strong><%= notification.visitor.nickname %></strong>
+        <% end%>
+        <%= "さんが" %>
+
         <%= "あなたをフォローしました" %>
+
       <% when "favorite" then %>
+        <%= link_to user_path(notification.visitor) do %>
+          <%= image_tag notification.visitor.get_profile_image(40, 40), class: "rounded-circle"; %>
+          <strong><%= notification.visitor.nickname %></strong>
+        <% end%>
+        <%= "さんが" %>
+
         <%= link_to "あなたの投稿", post_item_path(notification.post_item) %>
         <%= "にいいねしました" %>
+
       <% when "comment" then %>
+        <%= link_to user_path(notification.visitor) do %>
+          <%= image_tag notification.visitor.get_profile_image(40, 40), class: "rounded-circle"; %>
+          <strong><%= notification.visitor.nickname %></strong>
+        <% end%>
+        <%= "さんが" %>
+
         <% if notification.post_item.user_id == notification.visited.id %>
           <%= link_to "あなたの投稿", post_item_path(notification.post_item), class: "font-weight: bold;" %>
         <% else %>
@@ -25,9 +40,22 @@
         <% end %>
         <%= "にコメントしました" %>
         <p class="text-muted mb-0"><%= PostComment.find_by(id: notification.post_comment_id)&.comment %></p>
+
       <% when "repost_item" then %>
+        <%= link_to user_path(notification.visitor) do %>
+          <%= image_tag notification.visitor.get_profile_image(40, 40), class: "rounded-circle"; %>
+          <strong><%= notification.visitor.nickname %></strong>
+        <% end%>
+        <%= "さんが" %>
+
         <%= link_to "あなたの投稿", post_item_path(notification.post_item) %>
         <%= "をリポストしました" %>
+
+      <% when "warning" then %>
+        <p class="warning">
+          運営があなたの投稿を不適切な投稿と判断し、削除しました。
+          今後も同様の投稿があれば、アカウントが凍結される可能性があります。
+        </p>
       <% end %>
 
       <div class="small text-muted text-right">

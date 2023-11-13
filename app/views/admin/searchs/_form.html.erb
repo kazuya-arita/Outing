@@ -2,6 +2,6 @@
   <%= form_with url: admin_search_path, local: true, method: :get do |f| %>
     <%= f.text_field :search %>
     <%= f.select :model, options_for_select({ "ユーザー" => "User", "投稿内容" => "PostItem" }) %>
-    <%= f.submit 'Search', class: "btn btn-primary" %>
+    <%= f.submit '検索', class: "btn btn-primary" %>
   <% end %>
 </div>

@@ -24,6 +24,7 @@ class Public::SessionsController < Devise::SessionsController
     if @user.valid_password?(params[:user][:password])
       if @user.is_active == true
       else
+        flash[:alert] = "ログインできませんでした。アカウントが無効になっています。"
         redirect_to action: :new
       end
     end
