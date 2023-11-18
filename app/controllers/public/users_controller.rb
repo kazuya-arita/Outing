@@ -13,13 +13,18 @@ class Public::UsersController < ApplicationController
       flash[:notice] = "更新しました。"
       redirect_to user_path(@user.id)
     else
-      flash.now[:alert] = "更新できませんでした。"
-      render :edit
+      flash[:alert] = "更新できませんでした。"
+      redirect_to action: :edit
     end
   end
 
   def destroy
-    @user.destroy
+    if @user.destroy
+      flash[:alert] = "アカウントを削除しました。"
+    else
+      flash[:alert] = "アカウントを削除できませんでした。"
+      redirect_to :show
+    end
     redirect_to post_items_path
   end
 

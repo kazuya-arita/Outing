@@ -27,9 +27,9 @@
 
       <div class="col-4 offset-1 mb-3">
         <h5>
-          <label>ニックネーム</label>
+          <label>ニックネーム</label><span class="necessary">*</span>
           <%= f.text_field :nickname %>
-          <label class="mt-3">ユーザー名</label>
+          <label class="mt-3">ユーザー名</label><span class="necessary">*</span>
           <%= f.text_field :user_name %>
         </h5>
       </div>
@@ -43,7 +43,7 @@
 
       <div class="col-6 offset-1 d-flex align-items-center">
         <h5><%= f.submit "保存する", class: "btn btn-success mr-5" %></h5>
-        <h5><%= link_to "アカウントを削除する", users_confirm_path, class: "btn btn-danger" %></h5>
+        <h5><%= link_to "アカウントを削除する", confirm_user_path(@user.id), class: "btn btn-danger" %></h5>
       </div>
     </div>
   <% end %>

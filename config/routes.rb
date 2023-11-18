@@ -43,7 +43,7 @@ get "admin/search" => "admin/searchs#search"
   end
 
   #public/usersコントローラー
-  get "users/confirm" => "public/users#confirm"
+  #get "users/confirm" => "public/users#confirm"
   patch "users/nonrelease/:id" => "public/users#nonrelease"
   patch "users/release/:id" => "public/users#release"
   scope module: :public do
@@ -53,6 +53,7 @@ get "admin/search" => "admin/searchs#search"
       get "followers" => "relationships#followers", as: "followers"
       member do
         get :favorites
+        get :confirm
       end
     end
   end
