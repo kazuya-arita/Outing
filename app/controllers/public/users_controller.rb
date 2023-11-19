@@ -13,7 +13,7 @@ class Public::UsersController < ApplicationController
       flash[:notice] = "更新しました。"
       redirect_to user_path(@user.id)
     else
-      flash[:alert] = "更新できませんでした。"
+      flash[:alert] = "更新できませんでした。ニックネームとユーザー名が入力されているか確認してください。"
       redirect_to action: :edit
     end
   end
@@ -25,7 +25,7 @@ class Public::UsersController < ApplicationController
       flash[:alert] = "アカウントを削除できませんでした。"
       redirect_to :show
     end
-    redirect_to post_items_path
+    redirect_to user_path(@user.id)
   end
 
   def confirm

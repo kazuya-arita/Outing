@@ -24,7 +24,7 @@ class PostItem < ApplicationRecord
   #投稿内容の検索
   def self.search(search)
     if search
-      PostItem.where(['post_item LIKE ? OR address LIKE(?)', "%#{search}%", "%#{search}%"])
+      PostItem.where(['post_item LIKE ? OR address LIKE(?)', "%#{search}%", "%#{search}%"]).order('created_at DESC').limit(50) #空欄で検索した場合、全件取得する。
     else
       PostItem.all.order('created_at DESC').limit(50)
     end

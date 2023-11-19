@@ -46,7 +46,7 @@ class User < ApplicationRecord
   #ユーザーの検索
   def self.search(search)
     if search
-      User.where(['nickname LIKE ? OR user_name LIKE(?)', "%#{search}%", "%#{search}%"])
+      User.where(['nickname LIKE ? OR user_name LIKE(?)', "%#{search}%", "%#{search}%"]).limit(50)
     else
       User.all.limit(50)
     end
