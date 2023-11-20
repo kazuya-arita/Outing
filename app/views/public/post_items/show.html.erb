@@ -51,14 +51,27 @@
                       <%= image_tag post_comment.user.get_profile_image(80,80), class: "rounded-circle user-icon" %>
                       <% end %>
                       <strong><%= post_comment.user.nickname %></strong>
+                      <% if post_comment.user.nonreleased? %>
+                        <i class="fa-solid fa-lock"></i>
+                      <% end %>
                       <%= post_comment.created_at.strftime('%Y/%m/%d') %>
                       <p><%= post_comment.comment %></p>
                       <% if post_comment.user == current_user %>
                         <%= link_to "削除", post_item_post_comment_path(post_comment.post_item, post_comment), method: :delete, class: "btn btn-danger" %>
                       <% end %>
                     <% else %>
-                      <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-                      <p>非公開ユーザーのコメントです。</p>
+                      <% if post_comment.user == current_user %>
+                        <%= link_to user_path(post_comment.user.id) do %>
+                          <%= image_tag post_comment.user.get_profile_image(80,80), class: "rounded-circle user-icon" %>
+                        <% end %>
+                        <strong><%= post_comment.user.nickname %></strong>
+                        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+                        <p><%= post_comment.comment %></p>
+                        <%= link_to "削除", post_item_post_comment_path(post_comment.post_item, post_comment), method: :delete, class: "btn btn-danger" %>
+                      <% else %>
+                        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+                        <p>非公開ユーザーのコメントです。</p>
+                      <% end %>
                     <% end %>
                   <% end %>
                 </div>

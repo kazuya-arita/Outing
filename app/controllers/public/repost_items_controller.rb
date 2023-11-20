@@ -6,7 +6,9 @@ class Public::RepostItemsController < ApplicationController
     @repost_item = RepostItem.create(user_id: current_user.id, post_item_id: @post_item.id)
     flash[:notice] = "リポストしました。"
     @post_item = PostItem.find(params[:post_item_id])
-    @post_item.create_notification_repost_item!(current_user)
+    if current_user.released?
+      @post_item.create_notification_repost_item!(current_user)
+    end
     redirect_to post_item_path(@post_item.id)
   end
 
