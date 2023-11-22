@@ -24,6 +24,9 @@
           <div class="col-10">
             <p class="card-title">
               <strong><%= post_item.user.nickname %> (<%= post_item.user.user_name %>) </strong>
+              <% if post_item.user.nonreleased? %>
+                <i class="fa-solid fa-lock"></i>
+              <% end %>
               <%= post_item.created_at.strftime('%Y/%m/%d') %>
             </p>
             <p class="card-text">
@@ -37,7 +40,11 @@
             </p>
             <span>
               <i class="fa-regular fa-comment"></i><%= post_item.post_comments.count %>
-              <i class="fa-solid fa-repeat"></i><%= post_item.repost_items.count %>
+              <% if post_item.user.released? %>
+                <i class="fa-solid fa-repeat"></i><%= post_item.repost_items.count %>
+              <% else %>
+                <i class="fa-solid fa-repeat" style="color: #dae1ec;"><%= post_item.repost_items.count %></i>
+              <% end %>
               <i class="fa-solid fa-heart"></i><%= post_item.favorites.count %>
             </span>
           </div>

@@ -6,7 +6,11 @@ class Public::FavoritesController < ApplicationController
     favorite.save
     if current_user.released?
       post_item.create_notification_favorite!(current_user)
-    end  
+    else
+      if post_item.user.following?(current_user)
+        post_item.create_notification_favorite!(current_user)
+      end
+    end
     redirect_to post_item_path(post_item)
   end
 

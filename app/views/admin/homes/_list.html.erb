@@ -14,7 +14,7 @@
           <% end %>
         </div>
       </div>
-      
+
       <div class="row">
         <div class="col-2">
           <%= link_to admin_user_path(post_item.user.id) do %>
@@ -24,6 +24,9 @@
         <div class="col-10">
           <p class="card-title">
             <strong><%= post_item.user.nickname %> (<%= post_item.user.user_name %>) </strong>
+            <% if post_item.user.nonreleased? %>
+              <i class="fa-solid fa-lock"></i>
+            <% end %>
             <%= post_item.created_at.strftime('%Y/%m/%d') %>
           </p>
           <p class="card-text">

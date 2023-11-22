@@ -8,6 +8,10 @@ class Public::RepostItemsController < ApplicationController
     @post_item = PostItem.find(params[:post_item_id])
     if current_user.released?
       @post_item.create_notification_repost_item!(current_user)
+    else
+      if @post_item.user.following?(current_user)
+        @post_item.create_notification_repost_item!(current_user)
+      end
     end
     redirect_to post_item_path(@post_item.id)
   end

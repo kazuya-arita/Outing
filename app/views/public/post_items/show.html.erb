@@ -51,9 +51,7 @@
                       <%= image_tag post_comment.user.get_profile_image(80,80), class: "rounded-circle user-icon" %>
                       <% end %>
                       <strong><%= post_comment.user.nickname %></strong>
-                      <% if post_comment.user.nonreleased? %>
-                        <i class="fa-solid fa-lock"></i>
-                      <% end %>
+                      <i class="fa-solid fa-lock"></i>
                       <%= post_comment.created_at.strftime('%Y/%m/%d') %>
                       <p><%= post_comment.comment %></p>
                       <% if post_comment.user == current_user %>
@@ -65,6 +63,7 @@
                           <%= image_tag post_comment.user.get_profile_image(80,80), class: "rounded-circle user-icon" %>
                         <% end %>
                         <strong><%= post_comment.user.nickname %></strong>
+                        <i class="fa-solid fa-lock"></i>
                         <%= post_comment.created_at.strftime('%Y/%m/%d') %>
                         <p><%= post_comment.comment %></p>
                         <%= link_to "削除", post_item_post_comment_path(post_comment.post_item, post_comment), method: :delete, class: "btn btn-danger" %>

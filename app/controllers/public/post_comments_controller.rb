@@ -7,6 +7,10 @@ class Public::PostCommentsController < ApplicationController
     if comment.save
       if current_user.released?
         post_item.create_notification_comment!(current_user, comment.id)
+      else
+        if post_item.user.following?(current_user)
+          post_item.create_notification_comment!(current_user, comment.id)
+        end  
       end
       flash[:notice] = "コメントを投稿しました。"
       redirect_to post_item_path(post_item)
