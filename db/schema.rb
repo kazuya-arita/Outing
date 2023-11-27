@@ -111,10 +111,9 @@ ActiveRecord::Schema.define(version: 2023_11_10_124139) do
 
   create_table "repost_items", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "post_item_id"
+    t.bigint "post_item_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_item_id"], name: "index_repost_items_on_post_item_id"
     t.index ["user_id"], name: "index_repost_items_on_user_id"
   end
 
@@ -137,6 +136,5 @@ ActiveRecord::Schema.define(version: 2023_11_10_124139) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "repost_items", "post_items"
   add_foreign_key "repost_items", "users"
 end
