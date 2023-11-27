@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+root "public/post_items#index"
+
  # devise signup時のエラー解消
  get "users" => redirect("/users/sign_up")
 
