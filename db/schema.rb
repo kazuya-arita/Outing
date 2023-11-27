@@ -79,7 +79,6 @@ ActiveRecord::Schema.define(version: 2023_11_10_124139) do
     t.integer "repost_item_id"
     t.index ["post_comment_id"], name: "index_notifications_on_post_comment_id"
     t.index ["post_item_id"], name: "index_notifications_on_post_item_id"
-    t.index ["repost_item_id"], name: "index_notifications_on_repost_item_id"
     t.index ["visited_id"], name: "index_notifications_on_visited_id"
     t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end

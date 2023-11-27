@@ -3,6 +3,6 @@ class AddRepostItemIdToNotifications < ActiveRecord::Migration[6.1]
     add_column :notifications, :repost_item_id, :integer
   end
   
-  add_index :notifications, :repost_item_id
+  # add_index :notifications, :repost_item_id
   
 end
