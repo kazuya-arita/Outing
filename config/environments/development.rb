@@ -31,7 +31,7 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Don't care if the mailer can't send.→trueへ変更
   #メールの設定
@@ -88,5 +88,7 @@ Rails.application.configure do
   config.hosts << "c9c53a389f5541599cd82ae11023183b.vfs.cloud9.ap-northeast-1.amazonaws.com"
 
   config.active_job.queue_adapter = :inline
+
+  config.autoloader = :classic
 
 end
