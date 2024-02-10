@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
+  before_action :prevent_url, only: [:edit, :update, :confirm]
 
   def show
     @post_items = @user.post_items_with_repost_items.limit(50)
@@ -57,6 +58,12 @@ class Public::UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def prevent_url
+    if @user != current_user
+      redirect_to post_items_path
+    end
   end
 
 end

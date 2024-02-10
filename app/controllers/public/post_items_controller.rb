@@ -29,17 +29,25 @@ class Public::PostItemsController < ApplicationController
 
   def show
     @post_item = PostItem.find(params[:id])
+    @user = User.find(@post_item.user_id)
     @post_comment = PostComment.new
+    if @user.nonreleased?
+      redirect_to post_items_path
+    end
   end
 
   def destroy
     post_item = PostItem.find(params[:id])
-    if post_item.destroy
-      flash[:notice] = "投稿を削除しました。"
-      redirect_to post_items_path
+    if current_user.id = post_item.user_id
+      if post_item.destroy
+        flash[:notice] = "投稿を削除しました。"
+        redirect_to post_items_path
+      else
+        flash.now[:alert] = "投稿を削除できませんでした。"
+        render :show
+      end
     else
-      flash.now[:alert] = "投稿を削除できませんでした。"
-      render :show
+      redirect_to post_items_path
     end
   end
 
