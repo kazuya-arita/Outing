@@ -31,8 +31,14 @@ class Public::PostItemsController < ApplicationController
     @post_item = PostItem.find(params[:id])
     @user = User.find(@post_item.user_id)
     @post_comment = PostComment.new
-    if @user.nonreleased?
-      redirect_to post_items_path
+    if @user == current_user
+    else
+      if current_user.following?(@user)
+      else
+        if @user.nonreleased?
+         redirect_to post_items_path
+        end
+      end
     end
   end
 

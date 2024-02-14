@@ -2,6 +2,9 @@ class Public::RelationshipsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
+    if @user =! current_user
+      redirect_to post_items_path
+    end
     current_user.follow(params[:user_id])
     if current_user.released?
       @user.create_notification_follow!(current_user)

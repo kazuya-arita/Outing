@@ -17,6 +17,9 @@
         <div class="col-10">
           <p class="card-title">
             <strong><%= @post_item.user.nickname %> (<%= @post_item.user.user_name %>) </strong>
+            <% if @post_item.user.nonreleased? %>
+              <i class="fa-solid fa-lock"></i>
+            <% end %>
             <% if @post_item.user == current_user %>
               <%= link_to "投稿を削除", post_item_path(@post_item.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
             <% end %>

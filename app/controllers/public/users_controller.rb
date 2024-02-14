@@ -1,7 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
-  before_action :prevent_url, only: [:edit, :update, :confirm]
+  before_action :prevent_url, only: [:edit, :update, :confirm, :destroy]
 
   def show
     @post_items = @user.post_items_with_repost_items.limit(50)
