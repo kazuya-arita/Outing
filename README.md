@@ -24,7 +24,9 @@ SNSで観光スポットの情報が共有できれば、インターネット�
 ・観光スポットの情報が知りたいとき
 ​
 ## 設計書
-後程作成予定
+・テーブル定義書 https://docs.google.com/spreadsheets/d/1ysEwcCDOfXYPELpSp96BSJllgUfVEdrU0nxgIotc6qU/edit#gid=1243549839<br>
+・ER図 https://drive.google.com/drive/my-drive?hl=ja<br>
+・アプリケーション詳細設計書 https://docs.google.com/spreadsheets/d/11unnJzm2V4RNwkje9P8dOWTNVSTTf8ij-llVQQ_GojA/edit#gid=549108681<br>
 
 ## 実装機能リスト
 https://docs.google.com/spreadsheets/d/10qb1qGVaty0qReusN4HI6kcSGgAtcmbQgo0qhh4Fti0/edit#gid=1898975908
