@@ -32,7 +32,7 @@ SNSで観光スポットの情報が共有できれば、インターネット�
 https://docs.google.com/spreadsheets/d/10qb1qGVaty0qReusN4HI6kcSGgAtcmbQgo0qhh4Fti0/edit#gid=1898975908
 ​
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Linux(Amazon Linux release 2 (Karoo))
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
